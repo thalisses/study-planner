@@ -7,17 +7,19 @@ import { timeToSeconds } from "../../common/utils/time";
 
 interface Props {
   selectedTask: ITask | undefined;
+  finishTask: () => void;
 }
 
-export default function Stopwatch({ selectedTask }: Props) {
+export default function Stopwatch({ selectedTask, finishTask }: Props) {
   const [time, setTime] = useState(0);
 
   const decrementTime = (counter: number = 0) => {
     setTimeout(() => {
       if (counter > 0) {
         setTime(counter - 1);
-        decrementTime(counter - 1);
+        return decrementTime(counter - 1);
       }
+      finishTask();
     }, 1000);
   };
 

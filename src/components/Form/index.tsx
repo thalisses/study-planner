@@ -4,24 +4,13 @@ import React, { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { ITask } from "../../types/ITask";
 
-export default function Form(props: {
+interface Props {
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
-}) {
+}
+
+export default function Form({ setTasks }: Props) {
   const [taskTime, setTaskTime] = useState("00:00:00");
   const [taskName, setTaskName] = useState("");
-  const { setTasks } = props;
-
-  const handleOnChangeTaskTime = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setTaskTime(event.target.value);
-  };
-
-  const handleOnChangeTaskName = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setTaskName(event.target.value);
-  };
 
   const handleAddNewTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -39,7 +28,7 @@ export default function Form(props: {
         <label>Adicione um novo estudo</label>
         <input
           value={taskName}
-          onChange={handleOnChangeTaskName}
+          onChange={(event) => setTaskName(event.target.value)}
           type="text"
           name="taskName"
           id="taskName"
@@ -51,7 +40,7 @@ export default function Form(props: {
         <label>Tempo</label>
         <input
           value={taskTime}
-          onChange={handleOnChangeTaskTime}
+          onChange={(event) => setTaskTime(event.target.value)}
           type="time"
           step="1"
           name="studyTime"
