@@ -1,12 +1,25 @@
+import { ITask } from "../../../types/ITask";
+import style from "./Item.module.scss";
+
+interface Props extends ITask {
+  handleSelectTask: (selected: ITask) => void;
+}
+
 export default function Item({
   taskName,
   taskTime,
-}: {
-  taskName: string;
-  taskTime: string;
-}) {
+  selected,
+  completed,
+  id,
+  handleSelectTask,
+}: Props) {
   return (
-    <li>
+    <li
+      className={`${style.item} ${selected ? style.itemSelecionado : ""}`}
+      onClick={() =>
+        handleSelectTask({ taskName, taskTime, selected, completed, id })
+      }
+    >
       <h3>{taskName}</h3>
       <span>{taskTime}</span>
     </li>

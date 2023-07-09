@@ -1,12 +1,13 @@
 import style from "./Form.module.scss";
 import Button from "../Button";
 import React, { useState } from "react";
-import { ITasks } from "../../types/tasks";
+import { v4 as uuidv4 } from "uuid";
+import { ITask } from "../../types/ITask";
 
 export default function Form(props: {
-  setTasks: React.Dispatch<React.SetStateAction<ITasks[]>>;
+  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
 }) {
-  const [taskTime, setTaskTime] = useState("00:00");
+  const [taskTime, setTaskTime] = useState("00:00:00");
   const [taskName, setTaskName] = useState("");
   const { setTasks } = props;
 
@@ -24,13 +25,18 @@ export default function Form(props: {
 
   const handleAddNewTask = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setTasks((previousTasks) => [...previousTasks, { taskName, taskTime }]);
+    setTasks((previousTasks) => [
+      ...previousTasks,
+      { taskName, taskTime, selected: false, completed: false, id: uuidv4() },
+    ]);
+    setTaskName("");
+    setTaskTime("00:00:00");
   };
 
   return (
     <form className={style.novaTarefa} onSubmit={handleAddNewTask}>
       <div className={style.inputContainer}>
-        <label htmlFor="tarefa">Adicione um novo estudo</label>
+        <label>Adicione um novo estudo</label>
         <input
           value={taskName}
           onChange={handleOnChangeTaskName}
@@ -42,7 +48,7 @@ export default function Form(props: {
         />
       </div>
       <div className={style.inputContainer}>
-        <label htmlFor="tempo">Tempo</label>
+        <label>Tempo</label>
         <input
           value={taskTime}
           onChange={handleOnChangeTaskTime}
@@ -51,7 +57,7 @@ export default function Form(props: {
           name="studyTime"
           id="studyTime"
           min="00:00:00"
-          max="05:30:00"
+          max="02:00:00"
           required
         />
       </div>

@@ -1,16 +1,39 @@
 import Button from "../Button";
 import style from "./Stopwatch.module.scss";
 import Clock from "./Clock";
+import { ITask } from "../../types/ITask";
+import { useEffect, useState } from "react";
+import { timeToSeconds } from "../../common/utils/time";
 
-export default function Stopwatch() {
+interface Props {
+  selectedTask: ITask | undefined;
+}
+
+export default function Stopwatch({ selectedTask }: Props) {
+  const [time, setTime] = useState(0);
+
+  const decrementTime = (counter: number = 0) => {
+    setTimeout(() => {
+      if (counter > 0) {
+        setTime(counter - 1);
+        decrementTime(counter - 1);
+      }
+    }, 1000);
+  };
+
+  useEffect(() => {
+    if (selectedTask?.taskTime) {
+      setTime(timeToSeconds(selectedTask.taskTime));
+    }
+  }, [selectedTask]);
+
   return (
     <div className={style.cronometro}>
-      <p className={style.titulo}>Escolha um card e inicie o Cronômetro</p>
+      <p className={style.titulo}>Escolha um card e inicie o cronômetro</p>
       <div className={style.clockWrapper}>
-        <Clock />
+        <Clock time={time} />
       </div>
-      <Button>Começar</Button>
+      <Button onClick={() => decrementTime(time)}>Começar</Button>
     </div>
   );
 }
-Stopwatch.propsTypes = {};

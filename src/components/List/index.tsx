@@ -1,15 +1,20 @@
 import { memo } from "react";
-import { ITasks } from "../../types/tasks";
+import { ITask } from "../../types/ITask";
 import Item from "./Item";
 import style from "./List.module.scss";
 
-function List({ tasks }: { tasks: ITasks[] }) {
+interface Props {
+  tasks: ITask[];
+  handleSelectTask: (selected: ITask) => void;
+}
+
+function List({ tasks, handleSelectTask }: Props) {
   return (
     <aside className={style.listaTarefas}>
       <h2> Estudos do dia </h2>
       <ul>
-        {tasks.map((item, index) => (
-          <Item key={index} {...item} />
+        {tasks.map((item) => (
+          <Item handleSelectTask={handleSelectTask} key={item.id} {...item} />
         ))}
       </ul>
     </aside>
