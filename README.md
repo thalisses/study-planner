@@ -1,3 +1,7 @@
+# Study Planner
+
+This project was created to study TypeScript with React. It's a tool to manegement time of study, you can add a subject to study and start the clock! Enjoy it!
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
