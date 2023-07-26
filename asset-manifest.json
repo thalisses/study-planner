@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/study-planner/static/css/main.73f1e2ad.css",
+    "main.js": "/study-planner/static/js/main.142e0fa0.js",
+    "static/media/check-mark.svg": "/study-planner/static/media/check-mark.53f24c0a28e150404896.svg",
+    "index.html": "/study-planner/index.html",
+    "main.73f1e2ad.css.map": "/study-planner/static/css/main.73f1e2ad.css.map",
+    "main.142e0fa0.js.map": "/study-planner/static/js/main.142e0fa0.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.73f1e2ad.css",
+    "static/js/main.142e0fa0.js"
+  ]
+}
